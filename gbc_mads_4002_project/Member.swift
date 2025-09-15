@@ -15,6 +15,7 @@ class Member {
     var bookedServices: [Service] = []
     var attendedSessions: [Int: Int] = [:]
     
+    //constructor
     init (id: Int, name: String) {
         self.id = id
         self.name = name
@@ -44,7 +45,16 @@ class Member {
         
     }
     
+    /*
+     Has function markAttendance(id) that increases the number of attended sessions for
+     the service represented by id in the parameter
+     */
     func markAttendence(serviceId: Int) {
+        if(attendedSessions[serviceId] == nil ){
+            attendedSessions[serviceId]
+        } else {
+            attendedSessions[serviceId]! += 1
+        }
         
     }
 }
