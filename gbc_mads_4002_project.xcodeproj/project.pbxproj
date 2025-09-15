@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE67F2392E77CFA40065AB7B /* Gym.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE67F2382E77CFA40065AB7B /* Gym.swift */; };
+		CE67F23B2E77CFAD0065AB7B /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE67F23A2E77CFAD0065AB7B /* Member.swift */; };
+		CE67F23D2E77CFC20065AB7B /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE67F23C2E77CFC20065AB7B /* Service.swift */; };
+		CE67F23F2E77CFCD0065AB7B /* FitnessClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE67F23E2E77CFCD0065AB7B /* FitnessClass.swift */; };
+		CE67F2412E77CFDC0065AB7B /* PersonalTraining.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE67F2402E77CFDC0065AB7B /* PersonalTraining.swift */; };
+		CE67F2432E77CFEF0065AB7B /* IsPurchasable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE67F2422E77CFEF0065AB7B /* IsPurchasable.swift */; };
 		CE76DD1F2E76100E009A78B8 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE76DD1E2E76100E009A78B8 /* main.swift */; };
 /* End PBXBuildFile section */
 
@@ -23,6 +29,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		CE67F2382E77CFA40065AB7B /* Gym.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gym.swift; sourceTree = "<group>"; };
+		CE67F23A2E77CFAD0065AB7B /* Member.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
+		CE67F23C2E77CFC20065AB7B /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		CE67F23E2E77CFCD0065AB7B /* FitnessClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessClass.swift; sourceTree = "<group>"; };
+		CE67F2402E77CFDC0065AB7B /* PersonalTraining.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalTraining.swift; sourceTree = "<group>"; };
+		CE67F2422E77CFEF0065AB7B /* IsPurchasable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsPurchasable.swift; sourceTree = "<group>"; };
 		CE76DD1B2E76100E009A78B8 /* gbc_mads_4002_project */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = gbc_mads_4002_project; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE76DD1E2E76100E009A78B8 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -58,6 +70,12 @@
 			isa = PBXGroup;
 			children = (
 				CE76DD1E2E76100E009A78B8 /* main.swift */,
+				CE67F23C2E77CFC20065AB7B /* Service.swift */,
+				CE67F2382E77CFA40065AB7B /* Gym.swift */,
+				CE67F23A2E77CFAD0065AB7B /* Member.swift */,
+				CE67F23E2E77CFCD0065AB7B /* FitnessClass.swift */,
+				CE67F2402E77CFDC0065AB7B /* PersonalTraining.swift */,
+				CE67F2422E77CFEF0065AB7B /* IsPurchasable.swift */,
 			);
 			path = gbc_mads_4002_project;
 			sourceTree = "<group>";
@@ -121,6 +139,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE76DD1F2E76100E009A78B8 /* main.swift in Sources */,
+				CE67F23D2E77CFC20065AB7B /* Service.swift in Sources */,
+				CE67F23F2E77CFCD0065AB7B /* FitnessClass.swift in Sources */,
+				CE67F23B2E77CFAD0065AB7B /* Member.swift in Sources */,
+				CE67F2392E77CFA40065AB7B /* Gym.swift in Sources */,
+				CE67F2432E77CFEF0065AB7B /* IsPurchasable.swift in Sources */,
+				CE67F2412E77CFDC0065AB7B /* PersonalTraining.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
