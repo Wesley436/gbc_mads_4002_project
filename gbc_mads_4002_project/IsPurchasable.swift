@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+protocol IsPurchasable {
+    var description: String {get set}
+    func printReceipt()
+}

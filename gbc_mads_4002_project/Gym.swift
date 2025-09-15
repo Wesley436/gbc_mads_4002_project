@@ -9,6 +9,7 @@ import Foundation
 
 class Gym {
     var services: [Service] = []
+    var members: [Member] = []
     
     func listAllServices() {
         
