@@ -36,8 +36,4 @@ class Service {
         self.numberOfSessions = numberOfSessions
         self.price = price
     }
-    
-    func printReceipt() {
-        
-    }
 }

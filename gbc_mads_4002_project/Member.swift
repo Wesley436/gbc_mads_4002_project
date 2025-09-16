@@ -27,8 +27,15 @@ class Member {
     }
     
     func reloadCreditBalance() {
-        // TODO prompt user to input amount of credits to reload
-        creditBalance += 10
+        var creditsToAdd = -1
+        
+        while creditsToAdd <= 0 {
+            print("Type in the credits to reload. Do not enter 0: ", terminator: "")
+            let input = readLine() ?? ""
+            creditsToAdd = Int(input) ?? 0
+        }
+        
+        creditBalance += creditsToAdd
     }
     
     /**
@@ -84,5 +91,9 @@ class Member {
         }
         
         // TODO check if attended numberOfSessions for the booked service, mark as completed if so
+    }
+    
+    func printReceipt(service: Service) {
+        
     }
 }
