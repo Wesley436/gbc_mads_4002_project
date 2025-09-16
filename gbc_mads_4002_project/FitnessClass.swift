@@ -11,6 +11,13 @@ class FitnessClass: Service {
     var duration: Double // in hours
     var trainerName: String
     
+    override func getServiceInfo() -> String {
+        return "Fitness Class:" + super.getServiceInfo() +
+            "\nDuration: \(duration)\n Hour(s)" +
+            "Trainer name: \(trainerName)"
+    }
+    
+    //constructor 
     init (id: Int, name: String, numberOfSessions: Int, price: Int, duration: Double, trainerName: String) {
         self.duration = duration
         self.trainerName = trainerName

@@ -7,10 +7,11 @@
 
 import Foundation
 
-print("Hello, World!")
+Gym.addService()
 
-//Jared made this comment at 13th Sep 2025 8:33pm
+Gym.listAllServices()
 
-// Weskey test
+var mem1 = Member(id: 101, name: "member 1")
+
 
 //Pravin Test
