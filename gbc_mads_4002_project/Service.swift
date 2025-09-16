@@ -10,14 +10,20 @@ import Foundation
 class Service {
     var id: Int
     var name: String
-    var numberOfSessions: Int
-    var price: Int
+    var numberOfSessions: Int //total number of sessions
+    var price: Int // fee
     
+    
+
+    /**
+     toString print
+     */
     var description: String {
         return
             getServiceInfo() + 
             "\nPrice: \(price) credit(s)"
     }
+    
     
     func getServiceInfo() -> String {
         return

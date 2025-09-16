@@ -10,3 +10,6 @@ import Foundation
 Gym.addService()
 
 Gym.listAllServices()
+
+var mem1 = Member(id: 101, name: "member 1")
+

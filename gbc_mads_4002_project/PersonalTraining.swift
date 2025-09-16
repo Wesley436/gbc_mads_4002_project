@@ -15,6 +15,7 @@ class PersonalTraining: Service {
             "\nSession time: \(sessionTime)\n Hour(s)"
     }
     
+    //constructor 
     init (id: Int, name: String, numberOfSessions: Int, price: Int, sessionTime: Double) {
         self.sessionTime = sessionTime
         super.init(id: id, name: name, numberOfSessions: numberOfSessions, price: price)

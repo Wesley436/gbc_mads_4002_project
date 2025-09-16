@@ -34,8 +34,11 @@ class Member {
         
     }
     
+    /**
+            booking a service and adding it to bookedServiceIds if it doesnt already exsist
+     */
     func bookService(serviceId: Int) {
-        if (!bookedServiceIds.contains(serviceId)) {
+        if (!bookedServiceIds.contains(serviceId)) { //does not exsist in list already.
             bookedServiceIds.append(serviceId)
         }
     }
@@ -59,7 +62,8 @@ class Member {
         
     }
     
-    /*
+    
+    /**
      Has function markAttendance(id) that increases the number of attended sessions for
      the service represented by id in the parameter
      
