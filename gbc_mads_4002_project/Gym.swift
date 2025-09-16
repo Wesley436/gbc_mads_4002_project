@@ -11,9 +11,9 @@ class Gym {
     static var nextServiceId = 1
     static var nextMemberId = 1
     static var services: [Service] = [
-        Service(id: 1000, name: "Test 1", numberOfSessions: 3, price: 10),
-        Service(id: 1001, name: "Test 2", numberOfSessions: 3, price: 10),
-        Service(id: 1002, name: "Test 3", numberOfSessions: 3, price: 10)
+        Service(id: 1000, serviceName: "Test 1", numberOfSessions: 3, price: 10),
+        Service(id: 1001, serviceName: "Test 2", numberOfSessions: 3, price: 10),
+        Service(id: 1002, serviceName: "Test 3", numberOfSessions: 3, price: 10)
     ]
     static var members: [Member] = []
     
@@ -177,13 +177,13 @@ class Gym {
     class func addService() {
         var service: Service? = nil
         
-        var name = ""
+        var serviceName = ""
         var numberOfSessions = -1
         var price = -1
         
-        while name.isEmpty {
+        while serviceName.isEmpty {
             print("Type in the name of the service: ", terminator: "")
-            name = readLine() ?? ""
+            serviceName = readLine() ?? ""
         }
         
         while numberOfSessions <= 0 {
@@ -221,7 +221,7 @@ class Gym {
                             trainerName = readLine() ?? ""
                         }
                     
-                        service = FitnessClass(id: nextServiceId, name: name, numberOfSessions: numberOfSessions, price: price, duration: duration, trainerName: trainerName)
+                        service = FitnessClass(id: nextServiceId, serviceName: serviceName, numberOfSessions: numberOfSessions, price: price, duration: duration, trainerName: trainerName)
                         selectedServiceType = true
                     case 2:
                         var sessionTime = -1
@@ -231,7 +231,7 @@ class Gym {
                             sessionTime = Int(input) ?? 0
                         }
 
-                        service = PersonalTraining(id: nextServiceId, name: name, numberOfSessions: numberOfSessions, price: price, sessionTime: sessionTime)
+                        service = PersonalTraining(id: nextServiceId, serviceName: serviceName, numberOfSessions: numberOfSessions, price: price, sessionTime: sessionTime)
                         selectedServiceType = true
                     default:
                         break
@@ -256,7 +256,7 @@ class Gym {
         
         var matchedServices: [Service] = []
         for service in services {
-            if (service.name.lowercased().contains(keyword.lowercased())) {
+            if (service.serviceName.lowercased().contains(keyword.lowercased())) {
                 matchedServices.append(service)
             }
         }

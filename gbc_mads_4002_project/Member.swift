@@ -53,7 +53,7 @@ class Member {
         for serviceId in bookedServiceIds {
             var service = Gym.getServiceById(id: serviceId)
             if (service != nil) {
-                print(service!.name)
+                print(service!.serviceName)
             }
         }
     }

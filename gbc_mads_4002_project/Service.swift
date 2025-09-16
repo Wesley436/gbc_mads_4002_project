@@ -9,7 +9,7 @@ import Foundation
 
 class Service {
     var id: Int
-    var name: String
+    var serviceName: String
     var numberOfSessions: Int //total number of sessions
     var price: Int // fee
 
@@ -26,13 +26,13 @@ class Service {
     func getServiceInfo() -> String {
         return
             "Id: \(id)\n" +
-            "Name: \(name)\n" +
+            "Service name: \(serviceName)\n" +
             "Number of sessions: \(numberOfSessions)"
     }
     
-    init(id: Int, name: String, numberOfSessions: Int, price: Int) {
+    init(id: Int, serviceName: String, numberOfSessions: Int, price: Int) {
         self.id = id
-        self.name = name
+        self.serviceName = serviceName
         self.numberOfSessions = numberOfSessions
         self.price = price
     }

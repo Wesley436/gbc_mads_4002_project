@@ -18,9 +18,9 @@ class FitnessClass: Service {
     }
     
     //constructor 
-    init (id: Int, name: String, numberOfSessions: Int, price: Int, duration: Int, trainerName: String) {
+    init (id: Int, serviceName: String, numberOfSessions: Int, price: Int, duration: Int, trainerName: String) {
         self.duration = duration
         self.trainerName = trainerName
-        super.init(id: id, name: name, numberOfSessions: numberOfSessions, price: price)
+        super.init(id: id, serviceName: serviceName, numberOfSessions: numberOfSessions, price: price)
     }
 }

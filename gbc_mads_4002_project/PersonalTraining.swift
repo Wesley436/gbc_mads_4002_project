@@ -16,8 +16,8 @@ class PersonalTraining: Service {
     }
     
     //constructor 
-    init (id: Int, name: String, numberOfSessions: Int, price: Int, sessionTime: Int) {
+    init (id: Int, serviceName: String, numberOfSessions: Int, price: Int, sessionTime: Int) {
         self.sessionTime = sessionTime
-        super.init(id: id, name: name, numberOfSessions: numberOfSessions, price: price)
+        super.init(id: id, serviceName: serviceName, numberOfSessions: numberOfSessions, price: price)
     }
 }
