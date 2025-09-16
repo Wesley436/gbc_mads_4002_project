@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Service {
+class Service: IsPurchasable {
     var id: Int
     var serviceName: String
     var numberOfSessions: Int //total number of sessions
@@ -35,5 +35,9 @@ class Service {
         self.serviceName = serviceName
         self.numberOfSessions = numberOfSessions
         self.price = price
+    }
+    
+    func printReceipt(member: Member) {
+        
     }
 }

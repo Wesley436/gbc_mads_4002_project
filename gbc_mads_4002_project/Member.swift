@@ -13,7 +13,7 @@ class Member {
     var name: String
     var creditBalance: Int = 0
     var bookedServiceIds: [Int] = []
-    var attendedSessions: [Int: Int] = [:]
+    var attendedSessions: [Int: Int] = [:] // the key is the service's id, the value is the number of sessions attended
     
     //constructor
     init (id: Int, name: String, password: String) {
@@ -48,6 +48,9 @@ class Member {
         if (!bookedServiceIds.contains(serviceId)) { //does not exsist in list already.
             bookedServiceIds.append(serviceId)
         }
+        
+        var service = Gym.getServiceById(id: serviceId)
+        service!.printReceipt(member: self)
     }
     
     func viewBookedServices() {
@@ -67,6 +70,9 @@ class Member {
     
     func cancelService() {
         // TODO prompt user to input service id
+        
+        var service = Gym.getServiceById(id: 1000)
+        service!.printReceipt(member: self)
     }
     
     
@@ -91,9 +97,5 @@ class Member {
         }
         
         // TODO check if attended numberOfSessions for the booked service, mark as completed if so
-    }
-    
-    func printReceipt(service: Service) {
-        
     }
 }
