@@ -98,7 +98,7 @@ class Gym {
         
         while id <= 0 {
             print("Enter your member Id: ", terminator: "")
-            var input = readLine() ?? ""
+            let input = readLine() ?? ""
             if let intpuId = Int(input) {
                 id = intpuId
             }
@@ -173,42 +173,75 @@ class Gym {
         listServices(services: self.services)
     }
     
+    // process for adding a new service
     class func addService() {
         var service: Service? = nil
         
         var name = ""
-        var numberOfSessions = 3
-        var price = 1
+        var numberOfSessions = -1
+        var price = -1
         
-        // TODO prompt user to input and select type of service
-        // dummy values
-        /* <-- Jared commented this out
-        service = FitnessClass(id: id, name: name, numberOfSessions: numberOfSessions, price: price, duration: 1.0, trainerName: "")
-        service = PersonalTraining(id: id, name: name, numberOfSessions: numberOfSessions, price: price, sessionTime: 1.0)
-        */
-        print("type number of sessions. Do not enter 0: ", terminator:"")
-        let numberOfSessionsInput = readLine() ?? ""
-        numberOfSessions = Int(numberOfSessionsInput) ?? 0
-        //if(numberOfSessions == 0) { print("you didnt type in a positive full number. Now we both look foolish") }
-        
-        print("type in your name: ", terminator:"")
-        let nameInput = readLine() ?? ""
-        name = nameInput
-        
-        print("type in 'Fitness' if you want a Fitness Class and type in 'PersonalTraining' if you want a Personal Training class: ", terminator:"")
-        let serviceTypeString = readLine() ?? ""
-        if(serviceTypeString == "Fitness"){
-            // dummy value
-            service = FitnessClass(id: nextServiceId, name: name, numberOfSessions: numberOfSessions, price: price, duration: 1.0, trainerName: "")
-        } else if(serviceTypeString == "PersonalTraining"){
-            // dummy value
-            service = PersonalTraining(id: nextServiceId, name: name, numberOfSessions: numberOfSessions, price: price, sessionTime: 1.0)
-        } else {
-            print("you didnt type in the words correctly. Now we both look foolish")
-            //probably need to put all this in a while loop to prevent errors
+        while name.isEmpty {
+            print("Type in the name of the service: ", terminator: "")
+            name = readLine() ?? ""
         }
-        // Jared wrote from here till just above line 36
         
+        while numberOfSessions <= 0 {
+            print("Type number of sessions. Do not enter 0: ", terminator: "")
+            let input = readLine() ?? ""
+            numberOfSessions = Int(input) ?? 0
+        }
+        
+        while price <= 0 {
+            print("Type the price of the service in credits. Do not enter 0: ", terminator: "")
+            let input = readLine() ?? ""
+            price = Int(input) ?? 0
+        }
+        
+        var selectedServiceType = false
+        
+        while !selectedServiceType {
+            print("Type in '1' if you want a Fitness Class and type in '2' if you want a Personal Training class: ", terminator: "")
+            
+            let input = readLine() ?? ""
+            
+            if let option = Int(input) {
+                switch option {
+                    case 1:
+                        var duration = -1
+                        while duration <= 0 {
+                            print("Type the duration of a class in hours. Do not enter 0: ", terminator: "")
+                            let input = readLine() ?? ""
+                            duration = Int(input) ?? 0
+                        }
+                    
+                        var trainerName = ""
+                        while trainerName.isEmpty {
+                            print("Type in the name of the trainer: ", terminator: "")
+                            trainerName = readLine() ?? ""
+                        }
+                    
+                        service = FitnessClass(id: nextServiceId, name: name, numberOfSessions: numberOfSessions, price: price, duration: duration, trainerName: trainerName)
+                        selectedServiceType = true
+                    case 2:
+                        var sessionTime = -1
+                        while sessionTime <= 0 {
+                            print("Type the length of a session in hours. Do not enter 0: ", terminator: "")
+                            let input = readLine() ?? ""
+                            sessionTime = Int(input) ?? 0
+                        }
+
+                        service = PersonalTraining(id: nextServiceId, name: name, numberOfSessions: numberOfSessions, price: price, sessionTime: sessionTime)
+                        selectedServiceType = true
+                    default:
+                        break
+                }
+            }
+            
+            if (!selectedServiceType) {
+                print("You didnt type in the words correctly. Now we both look foolish")
+            }
+        }
         
         self.services.append(service!)
         nextServiceId += 1
