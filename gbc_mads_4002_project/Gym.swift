@@ -17,6 +17,151 @@ class Gym {
     ]
     static var members: [Member] = []
     
+    class func gymOwnerMenu() {
+        var exitMenu = false
+        while !exitMenu {
+            print("Gym Owner Menu")
+            print("1: Add service")
+            print("2: Search service")
+            print("3: List all services")
+            print("Type '0' to exit")
+            
+            let input = readLine() ?? ""
+            
+            if let option = Int(input) {
+                switch option {
+                    case 1:
+                        addService()
+                    case 2:
+                        searchServicesByName()
+                    case 3:
+                        listAllServices()
+                    case 0:
+                        exitMenu = true
+                    default:
+                        break
+                }
+            }
+        }
+    }
+
+    class func memberSignInMenu() {
+        var exitMenu = false
+        while !exitMenu {
+            print("Sign in Menu")
+            print("1: Sign in")
+            print("2: Create account")
+            print("Type '0' to exit")
+            
+            let input = readLine() ?? ""
+            
+            if let option = Int(input) {
+                switch option {
+                    case 1:
+                        memberSignIn()
+                    case 2:
+                        addMember()
+                    case 0:
+                        exitMenu = true
+                    default:
+                        break
+                }
+            }
+        }
+    }
+
+    class func addMember() {
+        var name = ""
+        var password = ""
+        
+        while name.isEmpty {
+            print("Enter your name: ", terminator: "")
+            name = readLine() ?? ""
+        }
+        
+        while password.isEmpty {
+            print("Enter your password: ", terminator: "")
+            password = readLine() ?? ""
+        }
+        
+        let member = Member(id: nextMemberId, name: name, password: password)
+        self.members.append(member)
+        nextMemberId += 1
+        
+        print("Your member Id is: \(member.id)")
+        memberSignedInMenu(member: member)
+    }
+    
+    class func memberSignIn() {
+        var id = -1
+        var password = ""
+        
+        while id <= 0 {
+            print("Enter your member Id: ", terminator: "")
+            var input = readLine() ?? ""
+            if let intpuId = Int(input) {
+                id = intpuId
+            }
+        }
+        
+        while password.isEmpty {
+            print("Enter your password: ", terminator: "")
+            password = readLine() ?? ""
+        }
+        
+        for member in members {
+            if (member.id == id && member.password == password) {
+                memberSignedInMenu(member: member)
+                return
+            }
+        }
+        
+        print("Incorrect member id or password.")
+    }
+    
+    class func memberSignedInMenu(member: Member) {
+        var exitMenu = false
+        while !exitMenu {
+            print("Member Menu")
+            print("1: Reload credits")
+            print("2: Check credit balance")
+            print("3: Search service")
+            print("4: Purchase service")
+            print("5: Cancel service")
+            print("6: Book service")
+            print("7: View booked services")
+            print("8: Mark attendence")
+            print("Type '0' to logout")
+            
+            let input = readLine() ?? ""
+            
+            if let option = Int(input) {
+                switch option {
+                    case 1:
+                        member.reloadCreditBalance()
+                    case 2:
+                        member.checkCreditBalance()
+                    case 3:
+                        searchServicesByName()
+                    case 4:
+                        member.purchaseService()
+                    case 5:
+                        member.cancelService()
+                    case 6:
+                        member.bookService()
+                    case 7:
+                        member.viewBookedServices()
+                    case 8:
+                        member.markAttendence()
+                    case 0:
+                        exitMenu = true
+                    default:
+                        break
+                }
+            }
+        }
+    }
+    
     // prints all services in the inputted list
     class func listServices(services: [Service]) {
         for service in services {
@@ -34,7 +179,6 @@ class Gym {
     class func addService() {
         var service: Service? = nil
         
-        var id = nextServiceId
         var name = ""
         var numberOfSessions = 3
         var price = 1
@@ -45,12 +189,12 @@ class Gym {
         service = FitnessClass(id: id, name: name, numberOfSessions: numberOfSessions, price: price, duration: 1.0, trainerName: "")
         service = PersonalTraining(id: id, name: name, numberOfSessions: numberOfSessions, price: price, sessionTime: 1.0)
         */
-        print("type number of sessions. Do not enter 0:", terminator:"")
+        print("type number of sessions. Do not enter 0: ", terminator:"")
         let numberOfSessionsInput = readLine() ?? ""
         numberOfSessions = Int(numberOfSessionsInput) ?? 0
         //if(numberOfSessions == 0) { print("you didnt type in a positive full number. Now we both look foolish") }
         
-        print("type in your name:", terminator:"")
+        print("type in your name: ", terminator:"")
         let nameInput = readLine() ?? ""
         name = nameInput
         
@@ -58,10 +202,10 @@ class Gym {
         let serviceTypeString = readLine() ?? ""
         if(serviceTypeString == "Fitness"){
             // dummy value
-            service = FitnessClass(id: id, name: name, numberOfSessions: numberOfSessions, price: price, duration: 1.0, trainerName: "")
+            service = FitnessClass(id: nextServiceId, name: name, numberOfSessions: numberOfSessions, price: price, duration: 1.0, trainerName: "")
         } else if(serviceTypeString == "PersonalTraining"){
             // dummy value
-            service = PersonalTraining(id: id, name: name, numberOfSessions: numberOfSessions, price: price, sessionTime: 1.0)
+            service = PersonalTraining(id: nextServiceId, name: name, numberOfSessions: numberOfSessions, price: price, sessionTime: 1.0)
         } else {
             print("you didnt type in the words correctly. Now we both look foolish")
             //probably need to put all this in a while loop to prevent errors
@@ -77,7 +221,7 @@ class Gym {
      A method to search for services by keyword.
      */
     class func searchServicesByName() {
-        print("Type in a keyword to search")
+        print("Type in a keyword to search: ", terminator: "")
         let keyword = readLine() ?? ""
         
         var matchedServices: [Service] = []
@@ -86,7 +230,12 @@ class Gym {
                 matchedServices.append(service)
             }
         }
-        listServices(services: matchedServices)
+        
+        if (matchedServices.isEmpty) {
+            print("No services are found.")
+        } else {
+            listServices(services: matchedServices)
+        }
     }
     
     /**

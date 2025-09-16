@@ -9,6 +9,7 @@ import Foundation
 
 class Member {
     var id: Int
+    var password: String
     var name: String
     var creditBalance: Int = 0
     var purchasedServiceIds: [Int] = []
@@ -16,28 +17,32 @@ class Member {
     var attendedSessions: [Int: Int] = [:]
     
     //constructor
-    init (id: Int, name: String) {
+    init (id: Int, name: String, password: String) {
         self.id = id
         self.name = name
+        self.password = password
     }
     
     func checkCreditBalance() {
         print("You have \(creditBalance) credits left")
     }
     
-    func reloadCreditBalance(creditAmount: Int) {
+    func reloadCreditBalance() {
         // TODO prompt user to input amount of credits to reload
-        creditBalance += creditAmount
+        creditBalance += 10
     }
     
-    func purchaseService(serviceId: Int) {
-        
+    func purchaseService() {
+        // TODO prompt user to input service id
     }
     
     /**
             booking a service and adding it to bookedServiceIds if it doesnt already exsist
      */
-    func bookService(serviceId: Int) {
+    func bookService() {
+        // TODO prompt user to input service id
+        var serviceId = -1
+        
         if (!bookedServiceIds.contains(serviceId)) { //does not exsist in list already.
             bookedServiceIds.append(serviceId)
         }
@@ -49,7 +54,7 @@ class Member {
             return
         }
         
-        print("You currently booked:")
+        print("You currently booked: ")
         for serviceId in bookedServiceIds {
             var service = Gym.getServiceById(id: serviceId)
             if (service != nil) {
@@ -58,8 +63,8 @@ class Member {
         }
     }
     
-    func cancelService(serviceId: Int) {
-        
+    func cancelService() {
+        // TODO prompt user to input service id
     }
     
     
@@ -69,7 +74,10 @@ class Member {
      
      also removes the service id from bookedServiceIds since the current session is completed and need to be booked again
      */
-    func markAttendence(serviceId: Int) {
+    func markAttendence() {
+        // TODO prompt user to input service id
+        var serviceId = -1
+        
         if(attendedSessions[serviceId] == nil ){
             attendedSessions[serviceId]
         } else {

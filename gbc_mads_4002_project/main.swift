@@ -19,45 +19,13 @@ while !exitMenu {
     if let option = Int(input) {
         switch option {
             case 1:
-                gymOwnerMenu()
+                Gym.gymOwnerMenu()
             case 2:
-                memberMenu()
+                Gym.memberSignInMenu()
             case 0:
                 exitMenu = true
             default:
                 break
         }
     }
-}
-
-func gymOwnerMenu() {
-    var exitMenu = false
-    while !exitMenu {
-        print("Gym Owner Menu")
-        print("1: Add service")
-        print("2: Search service")
-        print("3: List all services")
-        print("Type '0' to exit")
-        
-        let input = readLine() ?? ""
-        
-        if let option = Int(input) {
-            switch option {
-                case 1:
-                    Gym.addService()
-                case 2:
-                    Gym.searchServicesByName()
-                case 3:
-                    Gym.listAllServices()
-                case 0:
-                    exitMenu = true
-                default:
-                    break
-            }
-        }
-    }
-}
-
-func memberMenu() {
-    
 }
