@@ -7,14 +7,23 @@
 
 import Foundation
 
-class Service: IsPurchasable {
+class Service {
     var id: Int
     var name: String
     var numberOfSessions: Int
     var price: Int
     
     var description: String {
-        return ""
+        return
+            getServiceInfo() + 
+            "\nPrice: \(price) credit(s)"
+    }
+    
+    func getServiceInfo() -> String {
+        return
+            "Id: \(id)\n" +
+            "Name: \(name)\n" +
+            "Number of sessions: \(numberOfSessions)"
     }
     
     init(id: Int, name: String, numberOfSessions: Int, price: Int) {

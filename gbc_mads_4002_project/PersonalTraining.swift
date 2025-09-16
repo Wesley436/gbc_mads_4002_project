@@ -10,7 +10,12 @@ import Foundation
 class PersonalTraining: Service {
     var sessionTime: Double // in hours
     
-    init (id: Int, name: String, numberOfSessions: Int, price: Int, duration: Double, sessionTime: Double) {
+    override func getServiceInfo() -> String {
+        return super.getServiceInfo() +
+            "\nSession time: \(sessionTime)\n Hour(s)"
+    }
+    
+    init (id: Int, name: String, numberOfSessions: Int, price: Int, sessionTime: Double) {
         self.sessionTime = sessionTime
         super.init(id: id, name: name, numberOfSessions: numberOfSessions, price: price)
     }
