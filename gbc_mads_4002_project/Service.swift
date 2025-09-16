@@ -12,8 +12,6 @@ class Service {
     var name: String
     var numberOfSessions: Int //total number of sessions
     var price: Int // fee
-    
-    
 
     /**
      toString print

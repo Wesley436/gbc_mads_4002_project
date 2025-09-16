@@ -8,21 +8,33 @@
 import Foundation
 
 class Gym {
-    static var nextId = 1
-    static var services: [Service] = []
+    static var nextServiceId = 1
+    static var nextMemberId = 1
+    static var services: [Service] = [
+        Service(id: 1000, name: "Test 1", numberOfSessions: 3, price: 10),
+        Service(id: 1001, name: "Test 2", numberOfSessions: 3, price: 10),
+        Service(id: 1002, name: "Test 3", numberOfSessions: 3, price: 10)
+    ]
     static var members: [Member] = []
     
-    class func listAllServices() {
+    // prints all services in the inputted list
+    class func listServices(services: [Service]) {
         for service in services {
             print("----------")
             print(service.description)
         }
+        print()
+    }
+    
+    // prints all stored services
+    class func listAllServices() {
+        listServices(services: self.services)
     }
     
     class func addService() {
         var service: Service? = nil
         
-        var id = nextId
+        var id = nextServiceId
         var name = ""
         var numberOfSessions = 3
         var price = 1
@@ -58,20 +70,23 @@ class Gym {
         
         
         self.services.append(service!)
-        nextId += 1
+        nextServiceId += 1
     }
     
     /**
      A method to search for services by keyword.
      */
-    class func searchServicesByName(name: String) -> [Service] {
+    class func searchServicesByName() {
+        print("Type in a keyword to search")
+        let keyword = readLine() ?? ""
+        
         var matchedServices: [Service] = []
         for service in services {
-            if (service.name.lowercased().contains(name.lowercased())) {
+            if (service.name.lowercased().contains(keyword.lowercased())) {
                 matchedServices.append(service)
             }
         }
-        return matchedServices
+        listServices(services: matchedServices)
     }
     
     /**
