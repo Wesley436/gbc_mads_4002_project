@@ -12,8 +12,8 @@ class FitnessClass: Service {
     var trainerName: String
     
     override func getServiceInfo() -> String {
-        return "Fitness Class:" + super.getServiceInfo() +
-            "\nDuration: \(duration)\n Hour(s)" +
+        return "Fitness Class " + super.getServiceInfo() +
+            "\nDuration: \(duration) Hour(s)\n" +
             "Trainer name: \(trainerName)"
     }
     

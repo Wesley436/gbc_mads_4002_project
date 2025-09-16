@@ -11,8 +11,8 @@ class PersonalTraining: Service {
     var sessionTime: Double // in hours
     
     override func getServiceInfo() -> String {
-        return super.getServiceInfo() +
-            "\nSession time: \(sessionTime)\n Hour(s)"
+        return "Personal Training " + super.getServiceInfo() +
+            "\nSession time: \(sessionTime) Hour(s)"
     }
     
     //constructor 
