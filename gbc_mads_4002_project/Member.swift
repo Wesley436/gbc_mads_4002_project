@@ -43,13 +43,13 @@ class Member {
      */
     func bookService() {
         // TODO prompt user to input service id
-        var serviceId = -1
+        let serviceId = -1
         
         if (!bookedServiceIds.contains(serviceId)) { //does not exsist in list already.
             bookedServiceIds.append(serviceId)
         }
         
-        var service = Gym.getServiceById(id: serviceId)
+        let service = Gym.getServiceById(id: serviceId)
         service!.printReceipt(member: self)
     }
     
@@ -61,7 +61,7 @@ class Member {
         
         print("You currently booked: ")
         for serviceId in bookedServiceIds {
-            var service = Gym.getServiceById(id: serviceId)
+            let service = Gym.getServiceById(id: serviceId)
             if (service != nil) {
                 print(service!.serviceName)
             }
@@ -71,7 +71,7 @@ class Member {
     func cancelService() {
         // TODO prompt user to input service id
         
-        var service = Gym.getServiceById(id: 1000)
+        let service = Gym.getServiceById(id: 1000)
         service!.printReceipt(member: self)
     }
     
@@ -84,10 +84,10 @@ class Member {
      */
     func markAttendence() {
         // TODO prompt user to input service id
-        var serviceId = -1
+        let serviceId = -1
         
         if(attendedSessions[serviceId] == nil ){
-            attendedSessions[serviceId]
+            attendedSessions[serviceId] = 0
         } else {
             attendedSessions[serviceId]! += 1
         }
