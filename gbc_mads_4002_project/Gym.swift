@@ -126,11 +126,10 @@ class Gym {
             print("1: Reload credits")
             print("2: Check credit balance")
             print("3: Search service")
-            print("4: Purchase service")
+            print("4: Book service")
             print("5: Cancel service")
-            print("6: Book service")
-            print("7: View booked services")
-            print("8: Mark attendence")
+            print("6: View booked services")
+            print("7: Mark attendence")
             print("Type '0' to logout")
             
             let input = readLine() ?? ""
@@ -144,14 +143,12 @@ class Gym {
                     case 3:
                         searchServicesByName()
                     case 4:
-                        member.purchaseService()
+                        member.bookService()
                     case 5:
                         member.cancelService()
                     case 6:
-                        member.bookService()
-                    case 7:
                         member.viewBookedServices()
-                    case 8:
+                    case 7:
                         member.markAttendence()
                     case 0:
                         exitMenu = true

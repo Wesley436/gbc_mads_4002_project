@@ -12,7 +12,6 @@ class Member {
     var password: String
     var name: String
     var creditBalance: Int = 0
-    var purchasedServiceIds: [Int] = []
     var bookedServiceIds: [Int] = []
     var attendedSessions: [Int: Int] = [:]
     
@@ -30,10 +29,6 @@ class Member {
     func reloadCreditBalance() {
         // TODO prompt user to input amount of credits to reload
         creditBalance += 10
-    }
-    
-    func purchaseService() {
-        // TODO prompt user to input service id
     }
     
     /**
@@ -88,6 +83,6 @@ class Member {
             bookedServiceIds.remove(at: index)
         }
         
-        // TODO check if attended numberOfSessions for the purchased service, mark as completed if so
+        // TODO check if attended numberOfSessions for the booked service, mark as completed if so
     }
 }
