@@ -68,10 +68,42 @@ class Member {
         }
     }
     
+    /**
+     Cancellations are permitted if the member has not attended more than 1 session of a class or has not started their personal training session. Otherwise, cancellations are not allowed. If a cancellation is accepted, the original cost of the service is refunded to the member's credit balance, and the service is removed from their list of booked services.
+     print Recpit will always run when cancel Service is sucessfully called
+     */
     func cancelService() {
         // TODO prompt user to input service id
+        var beginRefund = false
+        let service = Gym.getServiceById(id: 0)
         
-        let service = Gym.getServiceById(id: 1000)
+        print("Type in the service id to be canceled: ", terminator: "")
+        let input = readLine() ?? ""
+        let serviceId = Int(input) ?? 0 // ??0 prevents the answer from being a String
+        
+        for i in 0..<bookedServiceIds.count {
+            if(bookedServiceIds[i]  == serviceId){ // the service serviceId exsists
+                if( (attendedSessions[serviceId] ?? -1) <= 1){//member has attended more than 1 sessions of the service then no canceling
+                    
+                    beginRefund = true
+                }
+            }
+        }
+        
+        
+        if(beginRefund){
+            //canceling step if all requirments are met. removing from array of bookedServiceIds
+            for i in 0..<bookedServiceIds.count {
+                if(bookedServiceIds[i]  == serviceId){
+                    bookedServiceIds.remove(at: i)
+                    let service = Gym.getServiceById(id: serviceId)
+                    creditBalance += service?.price ?? 0  //getting credit refund
+                }
+            }
+        }
+        
+        
+        //let service = Gym.getServiceById(id: 1000)
         service!.printReceipt(member: self)
     }
     
