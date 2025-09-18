@@ -11,11 +11,15 @@ class Gym {
     static var nextServiceId = 1
     static var nextMemberId = 1
     static var services: [Service] = [
-        Service(id: 1000, serviceName: "Test 1", numberOfSessions: 3, price: 10),
-        Service(id: 1001, serviceName: "Test 2", numberOfSessions: 3, price: 10),
-        Service(id: 1002, serviceName: "Test 3", numberOfSessions: 3, price: 10)
+        Service(id: 1000, serviceName: "Service A", numberOfSessions: 3, price: 10),
+        Service(id: 1001, serviceName: "Service B", numberOfSessions: 4, price: 20),
+        Service(id: 1002, serviceName: "Service C", numberOfSessions: 5, price: 30)
     ]
-    static var members: [Member] = []
+    static var members: [Member] = [
+        Member(id: 1000, name: "Member A", password: "1234"),
+        Member(id: 1001, name: "Member B", password: "1234"),
+        Member(id: 1002, name: "Member C", password: "1234")
+    ]
     
     class func gymOwnerMenu() {
         var exitMenu = false

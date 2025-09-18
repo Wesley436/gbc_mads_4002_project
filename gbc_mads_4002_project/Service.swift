@@ -37,7 +37,15 @@ class Service: IsPurchasable {
         self.price = price
     }
     
-    func printReceipt(member: Member) {
+    func printReceipt(member: Member, creditAmount: Int) {
+        print("Service Receipt:")
         
+        if (creditAmount > 0) {
+            print("Member '\(member.name)' (Id: \(member.id)) has cancelled service '\(serviceName)' (Id: \(id))")
+            print("\(creditAmount) credits refunded")
+        } else if (creditAmount < 0) {
+            print("Member '\(member.name)' (Id: \(member.id)) has booked service '\(serviceName)' (Id: \(id))")
+            print("\(-creditAmount) credits deducted")
+        }
     }
 }

@@ -9,5 +9,5 @@ import Foundation
 
 protocol IsPurchasable {
     var description: String {get}
-    func printReceipt(member: Member)
+    func printReceipt(member: Member, creditAmount: Int)
 }

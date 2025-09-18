@@ -50,7 +50,7 @@ class Member {
         }
         
         let service = Gym.getServiceById(id: serviceId)
-        service!.printReceipt(member: self)
+        service!.printReceipt(member: self, creditAmount: -(service?.price ?? 0))
     }
     
     func viewBookedServices() {
@@ -73,38 +73,24 @@ class Member {
      print Recpit will always run when cancel Service is sucessfully called
      */
     func cancelService() {
-        // TODO prompt user to input service id
-        var beginRefund = false
-        let service = Gym.getServiceById(id: 0)
-        
         print("Type in the service id to be canceled: ", terminator: "")
         let input = readLine() ?? ""
-        let serviceId = Int(input) ?? 0 // ??0 prevents the answer from being a String
+        let serviceId = Int(input) ?? 0 // ?? 0 prevents the answer from being a String
         
         for i in 0..<bookedServiceIds.count {
-            if(bookedServiceIds[i]  == serviceId){ // the service serviceId exsists
-                if( (attendedSessions[serviceId] ?? -1) <= 1){//member has attended more than 1 sessions of the service then no canceling
-                    
-                    beginRefund = true
-                }
-            }
-        }
-        
-        
-        if(beginRefund){
-            //canceling step if all requirments are met. removing from array of bookedServiceIds
-            for i in 0..<bookedServiceIds.count {
-                if(bookedServiceIds[i]  == serviceId){
+            if(bookedServiceIds[i] == serviceId){ // the service serviceId exsists
+                if((attendedSessions[serviceId] ?? -1) <= 1){ // member has attended more than 1 sessions of the service then no canceling
+                    // canceling step if all requirments are met. removing from array of bookedServiceIds
                     bookedServiceIds.remove(at: i)
+                    attendedSessions.removeValue(forKey: serviceId)
                     let service = Gym.getServiceById(id: serviceId)
-                    creditBalance += service?.price ?? 0  //getting credit refund
+                    creditBalance += service?.price ?? 0  // getting credit refund
+                    
+                    service!.printReceipt(member: self, creditAmount: service?.price ?? 0)
+                    return
                 }
             }
         }
-        
-        
-        //let service = Gym.getServiceById(id: 1000)
-        service!.printReceipt(member: self)
     }
     
     
@@ -118,7 +104,7 @@ class Member {
         // TODO prompt user to input service id
         let serviceId = -1
         
-        if(attendedSessions[serviceId] == nil ){
+        if(attendedSessions[serviceId] == nil){
             attendedSessions[serviceId] = 0
         } else {
             attendedSessions[serviceId]! += 1
