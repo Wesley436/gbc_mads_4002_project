@@ -105,14 +105,17 @@ class Member {
      
      also removes the service id from bookedServiceIds since the current session is completed and need to be booked again
      */
-    func markAttendence() {
-        // TODO prompt user to input service id
-        let serviceId = -1
-        
-        if(attendedSessions[serviceId] == nil){
-            attendedSessions[serviceId] = 0
+    func markAttendence(serviceId: Int, totalSessions: Int ) {
+        if(attendedSessions[serviceId] == nil ){
+            attendedSessions[serviceId] = 1
         } else {
             attendedSessions[serviceId]! += 1
+        }
+        
+        let current = attendedSessions[serviceId]!
+        
+        if current == totalSessions {
+            print(" Great Job finsihing the session ! ")
         }
         
         if let index = bookedServiceIds.firstIndex(of: serviceId) {
