@@ -11,7 +11,7 @@ class Member {
     var id: Int
     var password: String
     var name: String
-    var creditBalance: Int = 0
+    var creditBalance: Int = 100//Each account starts with 100 credit points, which can be reloaded at any time.
     var bookedServiceIds: [Int] = []
     var attendedSessions: [Int: Int] = [:]// the key is the service's id, the value is the number of sessions attended
     
@@ -22,6 +22,9 @@ class Member {
         self.password = password
     }
     
+    /**
+     displays self.creditBalance value to the user
+     */
     func checkCreditBalance() {
         print("You have \(creditBalance) credits left")
     }
@@ -36,13 +39,14 @@ class Member {
         }
         
         creditBalance += creditsToAdd
+        
+        checkCreditBalance()//show user their current balence
     }
     
     /**
      booking a service and adding it to bookedServiceIds if it doesnt already exsist
      */
     func bookService() {
-        // TODO prompt user to input service id <--Jared has finished this one! what do you think guys?
         var serviceId = -1
         
         print("Type in the input id. Do not enter -1: ", terminator: "")
@@ -55,12 +59,26 @@ class Member {
             serviceId = Int(input) ?? -1
         }
         
-        if (!bookedServiceIds.contains(serviceId)) { //does not exsist in list already.
-            bookedServiceIds.append(serviceId)
+            if (Gym.getServiceById(id: serviceId) == nil) {//service is nil and doesnt exsist
+                print("service is not real its nil")
+                
+            } else if (!bookedServiceIds.contains(serviceId)) { //exsits and does not exsist in list already.
+            
             let service = Gym.getServiceById(id: serviceId)
-            creditBalance -= service!.price
-            service!.printReceipt(member: self, creditAmount: -(service?.price ?? 0))
-        } else {
+            
+            if(service!.price <= creditBalance){
+                //perfect. requirments met. book
+                bookedServiceIds.append(serviceId)
+                creditBalance -= service!.price
+                service!.printReceipt(member: self, creditAmount: -(service?.price ?? 0))
+                
+            } else {
+                //too expensive
+                print("insufficient funds. \nYou have: \(creditBalance) required: \(service!.price) ")
+                
+            }
+            
+        } else {//exsits in list already
             print("You have booked this service already.")
         }
     }

@@ -38,7 +38,7 @@ class Service: IsPurchasable {
     }
     
     func printReceipt(member: Member, creditAmount: Int) {
-        print("Service Receipt:")
+        print("__________\nService Receipt:")
         
         if (creditAmount > 0) {
             print("Member '\(member.name)' (Id: \(member.id)) has cancelled service '\(serviceName)' (Id: \(id))")
@@ -47,5 +47,6 @@ class Service: IsPurchasable {
             print("Member '\(member.name)' (Id: \(member.id)) has booked service '\(serviceName)' (Id: \(id))")
             print("\(-creditAmount) credits deducted")
         }
+        print("__________")
     }
 }
