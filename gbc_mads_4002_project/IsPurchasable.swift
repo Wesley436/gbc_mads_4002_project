@@ -8,6 +8,6 @@
 import Foundation
 
 protocol IsPurchasable {
-    var description: String {get set}
-    func printReceipt()
+    var description: String {get}
+    func printReceipt(member: Member, creditAmount: Int)
 }

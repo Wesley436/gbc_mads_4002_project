@@ -8,16 +8,16 @@
 import Foundation
 
 class PersonalTraining: Service {
-    var sessionTime: Double // in hours
+    var sessionTime: Int // in hours
     
     override func getServiceInfo() -> String {
-        return super.getServiceInfo() +
-            "\nSession time: \(sessionTime)\n Hour(s)"
+        return "Personal Training " + super.getServiceInfo() +
+            "\nSession time: \(sessionTime) Hour(s)"
     }
     
     //constructor 
-    init (id: Int, name: String, numberOfSessions: Int, price: Int, sessionTime: Double) {
+    init (id: Int, serviceName: String, numberOfSessions: Int, price: Int, sessionTime: Int) {
         self.sessionTime = sessionTime
-        super.init(id: id, name: name, numberOfSessions: numberOfSessions, price: price)
+        super.init(id: id, serviceName: serviceName, numberOfSessions: numberOfSessions, price: price)
     }
 }

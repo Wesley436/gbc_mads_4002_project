@@ -7,11 +7,25 @@
 
 import Foundation
 
-Gym.addService()
-
-Gym.listAllServices()
-
-var mem1 = Member(id: 101, name: "member 1")
-
-
-//Pravin Test
+var exitMenu = false
+while !exitMenu {
+    print("Select user")
+    print("1: Gym Owner")
+    print("2: Member")
+    print("Type '0' to exit")
+    
+    let input = readLine() ?? ""
+    
+    if let option = Int(input) {
+        switch option {
+            case 1:
+                Gym.gymOwnerMenu()
+            case 2:
+                Gym.memberSignInMenu()
+            case 0:
+                exitMenu = true
+            default:
+                break
+        }
+    }
+}

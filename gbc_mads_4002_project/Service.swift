@@ -7,13 +7,11 @@
 
 import Foundation
 
-class Service {
+class Service: IsPurchasable {
     var id: Int
-    var name: String
+    var serviceName: String
     var numberOfSessions: Int //total number of sessions
     var price: Int // fee
-    
-    
 
     /**
      toString print
@@ -28,18 +26,26 @@ class Service {
     func getServiceInfo() -> String {
         return
             "Id: \(id)\n" +
-            "Name: \(name)\n" +
+            "Service name: \(serviceName)\n" +
             "Number of sessions: \(numberOfSessions)"
     }
     
-    init(id: Int, name: String, numberOfSessions: Int, price: Int) {
+    init(id: Int, serviceName: String, numberOfSessions: Int, price: Int) {
         self.id = id
-        self.name = name
+        self.serviceName = serviceName
         self.numberOfSessions = numberOfSessions
         self.price = price
     }
     
-    func printReceipt() {
+    func printReceipt(member: Member, creditAmount: Int) {
+        print("Service Receipt:")
         
+        if (creditAmount > 0) {
+            print("Member '\(member.name)' (Id: \(member.id)) has cancelled service '\(serviceName)' (Id: \(id))")
+            print("\(creditAmount) credits refunded")
+        } else if (creditAmount < 0) {
+            print("Member '\(member.name)' (Id: \(member.id)) has booked service '\(serviceName)' (Id: \(id))")
+            print("\(-creditAmount) credits deducted")
+        }
     }
 }
