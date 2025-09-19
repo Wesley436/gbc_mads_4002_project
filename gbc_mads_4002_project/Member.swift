@@ -13,8 +13,9 @@ class Member {
     var name: String
     var creditBalance: Int = 0
     var bookedServiceIds: [Int] = []
-    var attendedSessions: [Int: Int] = [:] // the key is the service's id, the value is the number of sessions attended
-
+    var attendedSessions: [Int: Int] = [:]// the key is the service's id, the value is the number of sessions attended
+    var totalSessions: Int = 0
+    
     //constructor
     init (id: Int, name: String, password: String) {
         self.id = id
@@ -39,29 +40,29 @@ class Member {
     }
     
     /**
-            booking a service and adding it to bookedServiceIds if it doesnt already exsist
+     booking a service and adding it to bookedServiceIds if it doesnt already exsist
      */
     func bookService() {
-            // TODO prompt user to input service id <--Jared has finished this one! what do you think guys?
-            var serviceId = -1
-            
-            print("Type in the input id. Do not enter -1: ", terminator: "")
+        // TODO prompt user to input service id <--Jared has finished this one! what do you think guys?
+        var serviceId = -1
+        
+        print("Type in the input id. Do not enter -1: ", terminator: "")
+        let input = readLine() ?? ""
+        serviceId = Int(input) ?? -1
+        
+        while(serviceId == -1){//insuring we get a valid answer
+            print("You entered an invalid value try again. And do not enter -1: ", terminator: "")
             let input = readLine() ?? ""
             serviceId = Int(input) ?? -1
-            
-            while(serviceId == -1){//insuring we get a valid answer
-                print("You entered an invalid value try again. And do not enter -1: ", terminator: "")
-                let input = readLine() ?? ""
-                serviceId = Int(input) ?? -1
-            }
-            
-            if (!bookedServiceIds.contains(serviceId)) { //does not exsist in list already.
-                bookedServiceIds.append(serviceId)
-            }
-            
-            let service = Gym.getServiceById(id: serviceId)
-            service!.printReceipt(member: self, creditAmount: -(service?.price ?? 0))
         }
+        
+        if (!bookedServiceIds.contains(serviceId)) { //does not exsist in list already.
+            bookedServiceIds.append(serviceId)
+        }
+        
+        let service = Gym.getServiceById(id: serviceId)
+        service!.printReceipt(member: self, creditAmount: -(service?.price ?? 0))
+    }
     
     func viewBookedServices() {
         if (bookedServiceIds.isEmpty) {
@@ -115,23 +116,36 @@ class Member {
      
      also removes the service id from bookedServiceIds since the current session is completed and need to be booked again
      */
-    func markAttendence(serviceId: Int, totalSessions: Int ) {
-        if(attendedSessions[serviceId] == nil ){
+    func markAttendence() {
+        print("Enter the service ID you want to mark attendance for: ", terminator: "")
+        let input = readLine() ?? ""
+        let serviceId = Int(input) ?? 0
+        
+        if !bookedServiceIds.contains(serviceId) {
+            print(" You have not booked a service with ID \(serviceId).")
+            return
+        }
+        
+        if attendedSessions[serviceId] == nil {
             attendedSessions[serviceId] = 1
         } else {
             attendedSessions[serviceId]! += 1
         }
         
-        let current = attendedSessions[serviceId]!
+        let currentSession = attendedSessions[serviceId]!
         
-        if current == totalSessions {
-            print(" Great Job finsihing the session ! ")
+        if let service = Gym.getServiceById(id: serviceId) {
+            let totalSessions = service.numberOfSessions
+            print(" Attended session \(currentSession) of \(totalSessions) for \(service.serviceName)")
+            
+            // If all sessions completed
+            if currentSession >= totalSessions {
+                print("Congrulation on finishing all your sessions")
+                if let index = bookedServiceIds.firstIndex(of: serviceId) {
+                    bookedServiceIds.remove(at: index)
+                }
+                attendedSessions.removeValue(forKey: serviceId)
+            }
         }
-        
-        if let index = bookedServiceIds.firstIndex(of: serviceId) {
-            bookedServiceIds.remove(at: index)
-        }
-        
-        // TODO check if attended numberOfSessions for the booked service, mark as completed if so
     }
 }
