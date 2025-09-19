@@ -14,7 +14,7 @@ class Member {
     var creditBalance: Int = 0
     var bookedServiceIds: [Int] = []
     var attendedSessions: [Int: Int] = [:] // the key is the service's id, the value is the number of sessions attended
-    
+
     //constructor
     init (id: Int, name: String, password: String) {
         self.id = id
@@ -73,7 +73,7 @@ class Member {
      print Recpit will always run when cancel Service is sucessfully called
      */
     func cancelService() {
-        print("Type in the service id to be canceled: ", terminator: "")
+        print("Type in the service id to be cancelled: ", terminator: "")
         let input = readLine() ?? ""
         let serviceId = Int(input) ?? 0 // ?? 0 prevents the answer from being a String
         
@@ -88,9 +88,14 @@ class Member {
                     
                     service!.printReceipt(member: self, creditAmount: service?.price ?? 0)
                     return
+                } else {
+                    print("Cannot cancel services with more than 1 sessions attended")
+                    return
                 }
             }
         }
+        
+        print("Cannot find service")
     }
     
     
