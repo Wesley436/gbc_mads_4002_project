@@ -42,16 +42,26 @@ class Member {
             booking a service and adding it to bookedServiceIds if it doesnt already exsist
      */
     func bookService() {
-        // TODO prompt user to input service id
-        let serviceId = -1
-        
-        if (!bookedServiceIds.contains(serviceId)) { //does not exsist in list already.
-            bookedServiceIds.append(serviceId)
+            // TODO prompt user to input service id <--Jared has finished this one! what do you think guys?
+            var serviceId = -1
+            
+            print("Type in the input id. Do not enter -1: ", terminator: "")
+            let input = readLine() ?? ""
+            serviceId = Int(input) ?? -1
+            
+            while(serviceId == -1){//insuring we get a valid answer
+                print("You entered an invalid value try again. And do not enter -1: ", terminator: "")
+                let input = readLine() ?? ""
+                serviceId = Int(input) ?? -1
+            }
+            
+            if (!bookedServiceIds.contains(serviceId)) { //does not exsist in list already.
+                bookedServiceIds.append(serviceId)
+            }
+            
+            let service = Gym.getServiceById(id: serviceId)
+            service!.printReceipt(member: self, creditAmount: -(service?.price ?? 0))
         }
-        
-        let service = Gym.getServiceById(id: serviceId)
-        service!.printReceipt(member: self, creditAmount: -(service?.price ?? 0))
-    }
     
     func viewBookedServices() {
         if (bookedServiceIds.isEmpty) {
