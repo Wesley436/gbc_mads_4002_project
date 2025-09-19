@@ -24,6 +24,7 @@ class Gym {
     class func gymOwnerMenu() {
         var exitMenu = false
         while !exitMenu {
+            print("==============")
             print("Gym Owner Menu")
             print("1: Add service")
             print("2: Search service")
@@ -52,6 +53,7 @@ class Gym {
     class func memberSignInMenu() {
         var exitMenu = false
         while !exitMenu {
+            print("------------")
             print("Sign in Menu")
             print("1: Sign in")
             print("2: Create account")
@@ -126,6 +128,7 @@ class Gym {
     class func memberSignedInMenu(member: Member) {
         var exitMenu = false
         while !exitMenu {
+            print("///////////")
             print("Member Menu")
             print("1: Reload credits")
             print("2: Check credit balance")
@@ -134,6 +137,7 @@ class Gym {
             print("5: Cancel service")
             print("6: View booked services")
             print("7: Mark attendence")
+            print("8: List all gym services in gym")
             print("Type '0' to logout")
             
             let input = readLine() ?? ""
@@ -154,6 +158,8 @@ class Gym {
                         member.viewBookedServices()
                     case 7:
                         member.markAttendence()
+                    case 8:
+                    listAllServices()
                     case 0:
                         exitMenu = true
                     default:
