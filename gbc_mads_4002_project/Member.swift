@@ -14,7 +14,6 @@ class Member {
     var creditBalance: Int = 0
     var bookedServiceIds: [Int] = []
     var attendedSessions: [Int: Int] = [:]// the key is the service's id, the value is the number of sessions attended
-    var totalSessions: Int = 0
     
     //constructor
     init (id: Int, name: String, password: String) {
@@ -58,10 +57,12 @@ class Member {
         
         if (!bookedServiceIds.contains(serviceId)) { //does not exsist in list already.
             bookedServiceIds.append(serviceId)
+            let service = Gym.getServiceById(id: serviceId)
+            creditBalance -= service!.price
+            service!.printReceipt(member: self, creditAmount: -(service?.price ?? 0))
+        } else {
+            print("You have booked this service already.")
         }
-        
-        let service = Gym.getServiceById(id: serviceId)
-        service!.printReceipt(member: self, creditAmount: -(service?.price ?? 0))
     }
     
     func viewBookedServices() {
@@ -122,7 +123,7 @@ class Member {
         let serviceId = Int(input) ?? 0
         
         if !bookedServiceIds.contains(serviceId) {
-            print(" You have not booked a service with ID \(serviceId).")
+            print("You have not booked a service with ID \(serviceId).")
             return
         }
         
